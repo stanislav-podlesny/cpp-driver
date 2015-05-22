@@ -1,0 +1,29 @@
+title:   DataStax C/C++ Driver
+summary: DataStax C++ Driver for Apache Cassandra Documentation
+homepage: http://datastax.github.io/cpp-driver/
+sections:
+  - title:    Topics
+    prefix:   /topics
+    type:     markdown
+    files:   'topics/**/*.md'
+
+  - title:     API docs
+    prefix:    /api
+    type:      doxygen
+    directory: 'include'
+    config: |
+      PREDEFINED = CASS_EXPORT=
+      EXCLUDE_SYMBOLS = XX* CASS_ERROR CASS_ERROR_MAP CASS_ERROR_LAST_ENTRY CASS_LOG_LEVEL_MAP CASS_LOG_LAST_ENTRY
+      ENABLE_PREPROCESSING = YES
+      MACRO_EXPANSION = YES
+      EXPAND_ONLY_PREDEF = NO
+      SKIP_FUNCTION_MACROS = YES
+      TYPEDEF_HIDES_STRUCT = YES
+      EXTRACT_ALL = NO
+      INLINE_SOURCES = NO
+
+versions:
+  - name: v2.0
+    ref: HEAD
+  - name: v1.0
+    ref: fd331e09f25e8e6058ad7f98e7e72f54bc9a9a94

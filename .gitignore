@@ -5,7 +5,7 @@
 *.0
 
 # Compiled Dynamic libraries
-*.so
+libcassandra.so*
 *.dylib
 
 # Compiled Static libraries
@@ -15,6 +15,7 @@
 
 # cmake output
 *.cmake
+!Find*.cmake
 *.build
 *.xcodeproj
 CMakeFiles
@@ -23,18 +24,42 @@ CMakeScripts
 Makefile
 install_manifest.txt
 
+# library files
+lib/boost/include/**
+lib/boost/lib/**
+lib/libuv/include/**
+lib/libuv/lib/**
+lib/libssh2/include/**
+lib/libssh2/lib/**
+lib/openssl/include/**
+lib/openssl/lib/**
+# Excluded library files from ignore
+!lib/boost/include/README
+!lib/boost/lib/README
+!lib/libuv/include/README
+!lib/libuv/lib/README
+!lib/libssh2/include/README
+!lib/libssh2/lib/README
+!lib/openssl/include/README
+!lib/openssl/lib/README
+
 # build files
 build
 Testing
 Debug
-demo/cql_demo
-test/unit_tests/cql_test
+demo/cassandra_demo
+test/unit_tests/cassandra_test
+
+# API docs files
+Doxyfile
+docs
 
 # editor
 *.swp
 *~
 .#*
 #*
+.clang_complete
 
 # OSX
 .DS_Store
@@ -46,5 +71,27 @@ test/unit_tests/cql_test
 # AStyle backup
 *.orig
 
-/extra/ccm_bridge/nbproject/private/
-/nbproject/private/
+# QT Creator
+*.config
+*.creator*
+*.files
+*.includes
+
+# MSVC
+*.vcxproj
+*.vcxproj.filters
+*.sdf
+*.sln
+*.suo
+*.opensdf
+
+# Travis Build Dependencies
+libuv-v*
+lib/libuv/include/**
+!lib/libuv/include/README
+lib/libuv/lib/**
+!lib/libuv/lib/README
+boost_1_*
+
+# Integration test configuration
+config*.txt
