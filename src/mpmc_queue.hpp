@@ -132,11 +132,19 @@ public:
   }
 
   static void memory_fence() {
+#define NCBI_SP_FIX
+#ifdef NCBI_SP_FIX
+    // this temorary fix prevent driver from hangings when optimized with -Ofast, see:
+    // https://jira.ncbi.nlm.nih.gov/browse/GWS-484
+    // https://datastax-oss.atlassian.net/browse/CPP-269
+    atomic_thread_fence(MEMORY_ORDER_SEQ_CST);
+#else //NCBI_SP_FIX
 #if defined(__x86_64__) || defined(_M_X64) || defined(__i386) || defined(_M_IX86)
     // No fence required becauase compare_exchange_weak() emits "lock cmpxchg" on x86/x64 enforcing total order.
 #elif defined(CASS_USE_BOOST_ATOMIC) || defined(CASS_USE_STD_ATOMIC)
     atomic_thread_fence(MEMORY_ORDER_SEQ_CST);
 #endif
+#endif //NCBI_SP_FIX
   }
 
 private:
